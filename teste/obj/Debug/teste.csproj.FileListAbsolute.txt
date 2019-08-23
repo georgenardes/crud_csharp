@@ -1,0 +1,15 @@
+C:\Users\George\source\repos\teste\teste\bin\Debug\teste.exe.config
+C:\Users\George\source\repos\teste\teste\bin\Debug\teste.exe
+C:\Users\George\source\repos\teste\teste\bin\Debug\teste.pdb
+C:\Users\George\source\repos\teste\teste\obj\Debug\teste.csprojAssemblyReference.cache
+C:\Users\George\source\repos\teste\teste\obj\Debug\teste.frmCadastro.resources
+C:\Users\George\source\repos\teste\teste\obj\Debug\teste.Properties.Resources.resources
+C:\Users\George\source\repos\teste\teste\obj\Debug\teste.csproj.GenerateResource.cache
+C:\Users\George\source\repos\teste\teste\obj\Debug\teste.csproj.CoreCompileInputs.cache
+C:\Users\George\source\repos\teste\teste\obj\Debug\teste.exe
+C:\Users\George\source\repos\teste\teste\obj\Debug\teste.pdb
+C:\Users\George\source\repos\teste\teste\bin\Debug\Mono.Security.dll
+C:\Users\George\source\repos\teste\teste\bin\Debug\Npgsql.dll
+C:\Users\George\source\repos\teste\teste\bin\Debug\Npgsql.pdb
+C:\Users\George\source\repos\teste\teste\bin\Debug\Npgsql.xml
+C:\Users\George\source\repos\teste\teste\obj\Debug\teste.csproj.CopyComplete
