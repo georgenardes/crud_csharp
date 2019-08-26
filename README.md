@@ -1,6 +1,6 @@
 # crud_csharp
 
-## Cadastro de Clientes usando a liguangem C# com framework Windows Forms e banco de dados relacional Postgres.  
+## Cadastro de Clientes usando a liguangem C# com Windows Forms e banco de dados relacional Postgres.  
 
 * Para realizar conexão com o banco de dados, realizar procedimentos abaixo utilizando PgAdmin.  
 
