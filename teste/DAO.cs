@@ -18,6 +18,10 @@ namespace teste
 
     public sealed class DAO
     {
+        /*
+         Atributo estático que referencia a propria classe.
+         Dessa forma, não se torna necessário abrir e fechar conexão toda vez que precisar do banco
+             */
         private static DAO staticDao = null;
 
         private string strConnect = "Server=127.0.0.1;User Id=postgres; Password=123456; Database=cadastro;";

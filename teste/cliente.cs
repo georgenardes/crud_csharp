@@ -47,9 +47,7 @@ namespace teste
         public Cliente()
         {
             this.dao = DAO.getInstance();
-
-            Data_nascimento = new DateTime(2010,01,01);
-            
+            limpar();            
         }
 
 
@@ -65,7 +63,7 @@ namespace teste
                         "cep = @cep, logradouro = @logradouro, " +
                         "numero_endereco = @numero_endereco, complemento = @complemento," +
                         "bairro = @bairro, localidade = @localidade, uf = @uf, " +
-                        "observacoes = @observacoes";
+                        "observacoes = @observacoes where _id = @id";
 
                     cmdUpdate.Parameters.AddWithValue("@cpf", retmask(cpf));
                     cmdUpdate.Parameters.AddWithValue("@nome", nome);
@@ -80,6 +78,7 @@ namespace teste
                     cmdUpdate.Parameters.AddWithValue("@localidade", localidade);
                     cmdUpdate.Parameters.AddWithValue("@uf", uf);
                     cmdUpdate.Parameters.AddWithValue("@observacoes", observacoes);
+                    cmdUpdate.Parameters.AddWithValue("@id", id);
 
                     cmdUpdate.ExecuteNonQuery();
                 }
@@ -115,38 +114,43 @@ namespace teste
         }
 
         public override bool gravar()
-        {
-            
-            Cpf = retmask(Cpf);
-            Numero_contato = retmask(Numero_contato);
-            Cep = retmask(Cep);         
-            
-            string cmdInserir = String.Format("INSERT INTO cliente(" +
-            "cpf, nome, data_nascimento, numero_contato, email_contato," +
-            "cep, logradouro, numero_endereco, complemento, bairro, localidade," +
-            "UF, observacoes) VALUES (" +
-            "'" + Cpf + "'," +
-            "'" + Nome +"'," +
-            "'" + Data_nascimento.ToString("dd/MM/yyyy") + "'," +
-            "'" + Numero_contato + "'," +
-            "'" + Email_contato + "'," +
-            "'" + Cep + "'," +
-            "'" + Logradouro + "'," +
-            "" + Numero_endereco + "," +
-            "'" + Complemento + "'," +
-            "'" + Bairro + "'," +
-            "'" + Localidade +"'," +
-            "'" + Uf + "'," +
-            "'" + Observacoes + "')");;
-
+        {   
             try
             {
-                using (NpgsqlCommand cmdInsert = dao.connection.CreateCommand())
+                using (NpgsqlCommand cmdInserir = dao.connection.CreateCommand())
                 {
-                    cmdInsert.CommandText = cmdInserir;
+                    cmdInserir.CommandText = "INSERT INTO CLIENTE (" +
+                        "cpf, nome, data_nascimento ," +
+                        "numero_contato, email_contato ," +
+                        "cep, logradouro, " +
+                        "numero_endereco, complemento," +
+                        "bairro, localidade, uf, " +
+                        "observacoes) " +
+                        "VALUES " +
+                        "(@cpf, @nome, @data_nascimento ," +
+                        "@numero_contato, @email_contato ," +
+                        "@cep, @logradouro, " +
+                        "@numero_endereco, @complemento," +
+                        "@bairro, @localidade, @uf, " +
+                        "@observacoes) ";
 
-                    cmdInsert.ExecuteNonQuery();
+                    cmdInserir.Parameters.AddWithValue("@cpf", retmask(cpf));
+                    cmdInserir.Parameters.AddWithValue("@nome", nome);
+                    cmdInserir.Parameters.AddWithValue("@data_nascimento", data_nascimento);
+                    cmdInserir.Parameters.AddWithValue("@numero_contato", retmask(numero_contato));
+                    cmdInserir.Parameters.AddWithValue("@email_contato", email_contato);
+                    cmdInserir.Parameters.AddWithValue("@cep", retmask(cep));
+                    cmdInserir.Parameters.AddWithValue("@logradouro", logradouro);
+                    cmdInserir.Parameters.AddWithValue("@numero_endereco", numero_endereco);
+                    cmdInserir.Parameters.AddWithValue("@complemento", complemento);
+                    cmdInserir.Parameters.AddWithValue("@bairro", bairro);
+                    cmdInserir.Parameters.AddWithValue("@localidade", localidade);
+                    cmdInserir.Parameters.AddWithValue("@uf", uf);
+                    cmdInserir.Parameters.AddWithValue("@observacoes", observacoes);
+
+                    cmdInserir.ExecuteNonQuery();
                 }
+                
                 limpar();
                 return true;
             }
@@ -154,7 +158,8 @@ namespace teste
             {
                 MessageBox.Show(msg.Message);
                 return false;
-            }finally
+            }
+            finally
             {
                 Id = 0;
             }
@@ -227,7 +232,8 @@ namespace teste
         {
             DataTable dt= new DataTable();          
 
-            string cmdSeleciona = "SELECT _id AS ID, nome, numero_contato, email_contato from cliente order by nome";
+            string cmdSeleciona = "SELECT _id AS ID, nome AS Nome, numero_contato AS Contato," +
+                "email_contato AS Email from cliente order by _id";
         
             try
             {
@@ -244,7 +250,7 @@ namespace teste
             return dt;
         }
 
-        private string retmask(string strToRet)
+        public static string retmask(string strToRet)
         {
             if (strToRet == null)
                 strToRet = "";
