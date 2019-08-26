@@ -65,4 +65,4 @@ create table cliente (
 ### O sistema permite que o usuário cancele o cadastro  
 ### O sistema permite ordenação dos campos que estão na grid.    
 
-* O banco de dados e framework foram escolhidos visando a facilidade e produtividade, com base no que estou estudando no momento.  
+* O banco de dados e a biblioteca visual foram escolhidos visando a facilidade e produtividade, com base no que estou estudando no momento.  
