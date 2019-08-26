@@ -23,8 +23,6 @@ namespace teste
 
         private void onClickInserir(object sender, EventArgs e)
         {
-            MessageBox.Show(alterando.ToString());
-
             if (alterando)           
                 cliente.alterar();
             else
