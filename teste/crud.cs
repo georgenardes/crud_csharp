@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace teste
 {
-    abstract class crud
+    abstract class Crud
     {
         public abstract bool ler();
         public abstract bool gravar();
         public abstract bool alterar();
         public abstract bool deletar();
-
-
     }
 }
