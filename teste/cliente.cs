@@ -114,7 +114,13 @@ namespace teste
         }
 
         public override bool gravar()
-        {   
+        {
+            if (retmask(cpf).Trim().Equals(""))
+            {
+                MessageBox.Show("Digite o CPF!");
+                return false;
+            }
+
             try
             {
                 using (NpgsqlCommand cmdInserir = dao.connection.CreateCommand())
@@ -273,15 +279,13 @@ namespace teste
 
         public int buscarCep(string strCep)
         {
-            MessageBox.Show(strCep);
-
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://viacep.com.br/ws/" + retmask(strCep) + "/json/");
             request.AllowAutoRedirect = false;
             HttpWebResponse ChecaServidor = (HttpWebResponse)request.GetResponse();
 
             if (ChecaServidor.StatusCode != HttpStatusCode.OK)
             {                
-                return 503; // Sai da rotina
+                return 503; // Erro de servidor
             }
 
             using (Stream webStream = ChecaServidor.GetResponseStream())

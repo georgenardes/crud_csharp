@@ -8,7 +8,6 @@ namespace teste
         Cliente cliente = null;
         bool alterando = false;
 
-
         public frmCadastro()
         {            
             InitializeComponent();
@@ -19,6 +18,10 @@ namespace teste
             cliente = new Cliente();
 
             bind();
+
+            btnAlterar.Enabled = false;
+            btnExcluir.Enabled = false;
+            dgvCliente.ClearSelection();
         }
 
         private void onClickInserir(object sender, EventArgs e)
@@ -32,13 +35,18 @@ namespace teste
 
             inflar();
             alterando = false;
-            btnExcluir.Enabled = true;
+            btnExcluir.Enabled = false;
+            btnAlterar.Enabled = false;
+            dgvCliente.ClearSelection();
         }
 
         private void onClickDeletar(object sender, EventArgs e)
         {
             cliente.deletar();
-            dgvCliente.DataSource = cliente.getAll();            
+            dgvCliente.DataSource = cliente.getAll();
+            btnExcluir.Enabled = false;
+            btnAlterar.Enabled = false;
+            dgvCliente.ClearSelection();
         }
 
         private void onClickAlterar(object sender, EventArgs e)
@@ -47,6 +55,8 @@ namespace teste
             inflar();
             alterando = true;
             btnExcluir.Enabled = false;
+            btnAlterar.Enabled = false;
+            dgvCliente.ClearSelection();
         }
 
         private void onClickCancelar(object sender, EventArgs e)
@@ -54,13 +64,17 @@ namespace teste
             cliente.limpar();
             inflar();
             alterando = false;
-            btnExcluir.Enabled = true;
+            btnExcluir.Enabled = false;
+            btnAlterar.Enabled = false;
+            dgvCliente.ClearSelection();
         }
 
         
         private void dgvFunci_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             cliente.Id = Convert.ToInt32(dgvCliente.Rows[e.RowIndex].Cells[0].Value);
+            btnAlterar.Enabled = true;
+            btnExcluir.Enabled = true;            
         }
         
         private void bind()
@@ -82,7 +96,7 @@ namespace teste
             txtBairro.DataBindings.Add(new Binding("Text", cliente, "bairro"));
             txtLocalidade.DataBindings.Add(new Binding("Text", cliente, "localidade"));
             txtUf.DataBindings.Add(new Binding("Text", cliente, "uf"));
-            txtObservacoes.DataBindings.Add(new Binding("Text", cliente, "observacoes"));
+            txtObservacoes.DataBindings.Add(new Binding("Text", cliente, "observacoes"));            
            
         }
 
